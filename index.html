@@ -1,1 +1,17 @@
-Being happy is very important
+<!DOCTYPE html>
+<html>
+<head>
+	<title>YaoKai's Blog</title>
+</head>
+<body>
+<div id="posts_list">
+	<ul>
+		{% for post in site.posts %}
+		<li>
+			<a href="{{ post.url }}">{{ post.title }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+</body>
+</html>
