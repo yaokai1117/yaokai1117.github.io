@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>YaoKai's Blog</title>
-</head>
-<body>
-<div id="posts_list">
+---
+layout: default
+title: YaoKai's Blog
+---
+
+<div id="posts">
 	<ul>
 		{% for post in site.posts %}
 		<li>
@@ -13,5 +12,3 @@
 		{% endfor %}
 	</ul>
 </div>
-</body>
-</html>
