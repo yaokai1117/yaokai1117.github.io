@@ -10,3 +10,7 @@ Building a blog(or any other web site) of oneself is really a good way to learn 
 **I find GitHub of great help** when I trying to build my site, in GigHub I can find a lot of source code of good blog examples. That's really great! I believe that I should spend more time in GitHub, and try to use it better. The source code in github is very good materials for learning programming.
 
 And **to design a webside** is really a **difficult job**, even choosing a color will take tons of time. At the end I decide make my homepage nearly the same as a example in jekyll's wiki. And I will change my sites' appearence a lot in the future using some javascript.
+
+What's more, write blog in English is not a easy job for, I spent a nearly an hour writing these words...I think I may use Chinese in the future, so that a lot of time can be saved.
+
+**More efficiency, more concentrated, go go go!**
