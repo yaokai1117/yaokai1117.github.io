@@ -1,8 +1,9 @@
 encoding: UTF-8
-highlighter: true
+highlighter: pygments
 markdown: redcarpet
 redcarpet:
   extensions:
+    - tables
     - hard_wrap
     - no_intra_emphasis
     - autolink
