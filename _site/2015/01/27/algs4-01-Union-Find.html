@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/css/main.css">
+	<title>algorithms01-Union-Find</title>
+</head>
+
+<body id="bkg">
+
+<div id="wrapper">
+
+	<div id="header">
+		<h1>Enjoy learning, enjoy coding.</h1>
+	</div>
+
+	<div id="menu">
+		<ul>
+			<li><a href="/index.html">Home</a></li>
+			<li><a href="/index.html">Posts</a></li>
+			<li><a href="http://home.ustc.edu.cn/~yaokai">About Me</a></li>
+			<li><a href="https://github.com/yaokai1117">GitHub</a></li>
+		</ul>
+	</div>
+
+	<div id="content">
+		<hr />
+		<div id="post">
+
+  <div class="" ="post-header">
+    <h1 class="post-title">algorithms01-Union-Find</h1>
+    <p class="post-meta">Jan 27, 2015</p>
+  </div>
+
+  <div class="post-content">
+    <p>今天开始学习Coursera上的一个算法课程　*Algorithms Part I * ,参考书<a href="http://algs4.cs.princeton.edu/home/">Algorithms, 4th Edition</a>。在这个过程中我大概会按每一讲来对应地更新我的blog。今天是第一讲：Union-Find.</p>
+
+<h3 id="union-find">Union-Find的算法及其优化</h3>
+
+<h4 id="dynamic-connectivity">1.Dynamic connectivity问题</h4>
+<p>所谓Dynamic connectiveity，实际上是我们很熟悉的一个概念，简单的说集合上定义的一个<em>等价关系</em>（自反性，传递性，对称性)能够对集合进行分划,这是在线性代数课程上就接触过的（实际上在很多地方都遇到过，这是个很普适的概念，甚至我热学课的老师在讲热力学第零定律推出温度定义时也提到了这个）。我们要做的就是构造一个ADT来描述这种关系，一个可行的办法就是我们接下来要说的Union-Find。</p>
+
+<p>这个问题有很广的应用，我在这学期学习数据结构时，有一次用Kruskal算法求最小生成数，需要表示图的连通片，就是一个这一类的问题。我当时用的方法是最基础的算法，复杂度为n^2的，事实上这个问题可以有更好（好得多）的算法，let’s have a look:)</p>
+
+<p><strong>说明</strong>：因为课程中有些地方不知怎么翻译，碰巧发现这一讲的内容用图论语言来描述十分适合，所以本文中相关概念均用图论语言描述（如讲components称为连通片）。</p>
+
+<h4 id="union-find-1">2. Union-Find</h4>
+<p>首先明确这个ADT应该能做哪些事情,也就是UF的API了: </p>
+
+<pre><code>    void union(p, q)            //将p, q相连接，实际上也将它们所在连通片连接在一起  
+    int find(p)                 //返回ｐ所在连通片的辨识标志  
+    boolean connected(p, q)     //判断p, q是否连通  
+</code></pre>
+<p>一个很自然的想法是，使用一个长度为Ｎ的一维数组id[N]表示Ｎ个元素，当且仅当id[p] == id[q]时，p与q相连通，同一连通片中的元素在数组中的值相同。这样做find操作和connected操作都只需要常数时间，然而每次union操作却要花费Ｏ(n)的时间，因为遍历整个数组是不看避免的，我们希望能对其进行优化。</p>
+
+<ul>
+  <li>
+    <p><strong>第一层优化：树型结构实现Quick-Union</strong>。仍然是数组id[N]，换一种角度，将每个连通片看成一棵树（从图论的角度来看，这是很直观的），id[p]的值是p的parent，对于树根ｒ有id[r]==r。find返回ｐ所在树的根，即用根来作为每个连通片的标志。这样，union(p,q)只要先进行find(p)和find(q)找到p、q的根pr、qr，再让pr成为qr的孩子，即id[pr]=qr，就可以完成union操作。时间复杂度为Ｏ(tree height),相较于之前的Ｏ(N)
+要好了很多。值得注意的是这时find操作和connected操作也需要Ｏ(tree height)的时间，当然这是值得的。  </p>
+  </li>
+  <li>
+    <p><strong>第二层优化：使树趋于“平衡”</strong>。经过第一层优化后的算法其时间复杂度降到了Ｏ(tree height)，但算法对tree height完全没有采取限制措施，换言之，最差情况下，一颗“歪脖子树”的tree height可以达到N,这时算法的时间复杂度又退化回Ｏ(n)了。因此第二步优化（称为weighted quick-union)的目的就是为了使树更“平衡”一些。只需在进行union时加一步比较操作，让规模更小的树并进规模较大的树中（注意，这里的规模指的是顶点个数而不是高度），就会有很大的改善。可以证明，加上这一步操作后树的高度至多为log(N)+1，时间复杂度进一步优化为Ｏ(log(N))。 </p>
+  </li>
+</ul>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">union</span><span class="o">(</span><span class="kt">int</span> <span class="n">p</span><span class="o">,</span> <span class="kt">int</span> <span class="n">q</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">rootP</span> <span class="o">=</span> <span class="n">find</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">rootQ</span> <span class="o">=</span> <span class="n">find</span><span class="o">(</span><span class="n">q</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">rootP</span> <span class="o">==</span> <span class="n">rootQ</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+
+        <span class="c1">// make smaller root point to larger one</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">sz</span><span class="o">[</span><span class="n">rootP</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">sz</span><span class="o">[</span><span class="n">rootQ</span><span class="o">])</span> <span class="o">{</span> 
+            <span class="n">id</span><span class="o">[</span><span class="n">rootP</span><span class="o">]</span> <span class="o">=</span> <span class="n">rootQ</span><span class="o">;</span> 
+            <span class="n">sz</span><span class="o">[</span><span class="n">rootQ</span><span class="o">]</span> <span class="o">+=</span> <span class="n">sz</span><span class="o">[</span><span class="n">rootP</span><span class="o">];</span> 
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span> 
+            <span class="n">id</span><span class="o">[</span><span class="n">rootQ</span><span class="o">]</span> <span class="o">=</span> <span class="n">rootP</span><span class="o">;</span> 
+            <span class="n">sz</span><span class="o">[</span><span class="n">rootP</span><span class="o">]</span> <span class="o">+=</span> <span class="n">sz</span><span class="o">[</span><span class="n">rootQ</span><span class="o">];</span> 
+        <span class="o">}</span>
+    <span class="o">}</span></code></pre></div>
+
+<ul>
+  <li><strong>第三层优化：使树趋于“平坦”</strong>。既然UF中这棵树“越矮越好”，我们为什么不想办法让它更矮一点（最好高度只有２）呢？出于这样的考虑，第三步优化（称为path compression,路径压缩)的目的是使树平坦化。如果每次find操作在找到根后载回过头来再循环一次，将一路上遇到的所有节点的parent都变改为树根，那么最终得到的树高度会非常小，但是这样操作十分麻烦，且无必要。实际上，我们只需在find的循环中加一句id[p]=id[id[p]]，路径就可以被压缩到一个很理想的状况，此时所有操作的时间复杂度都可以达到接近常数时间了。</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">int</span> <span class="nf">find</span><span class="o">(</span><span class="kt">int</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="n">id</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nf">IndexOutOfBoundsException</span><span class="o">();</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="n">id</span><span class="o">[</span><span class="n">p</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">id</span><span class="o">[</span><span class="n">p</span><span class="o">]</span> <span class="o">=</span> <span class="n">id</span><span class="o">[</span><span class="n">id</span><span class="o">[</span><span class="n">p</span><span class="o">]];</span>    <span class="c1">// path compression by halving</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">id</span><span class="o">[</span><span class="n">p</span><span class="o">];</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+    <span class="o">}</span></code></pre></div>
+
+<p>每一步优化的复杂度比较：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">algorithm</th>
+      <th style="text-align: center">constructor</th>
+      <th style="text-align: center">union</th>
+      <th style="text-align: center">find</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">quick-find</td>
+      <td style="text-align: center">N</td>
+      <td style="text-align: center">N</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">quick-union</td>
+      <td style="text-align: center">N</td>
+      <td style="text-align: center">tree height</td>
+      <td style="text-align: center">tree height</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">weightedquick-union</td>
+      <td style="text-align: center">N</td>
+      <td style="text-align: center">lgN</td>
+      <td style="text-align: center">lgN</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">weighted QU with path compression</td>
+      <td style="text-align: center">N</td>
+      <td style="text-align: center">close to 1</td>
+      <td style="text-align: center">close to 1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">impossible</td>
+      <td style="text-align: center">N</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>这位教授在视频中提到了一个很有意思的观点，是我之前没有听到过的。一个复杂度为n^2的算法为什么不够快呢？这似乎是个没什么意义的问题，可能会被回答以“常识”之类的答案，这位教授给出的解答却是，因为它跟不上计算机技术发展的速度。假设计算机处理器的速度快了十倍，在这期间它的存储能力也扩大了十倍，即问题的规模从ｎ扩大到了10ｎ，那么，一个时间复杂度为ｎ^2的算法做同一件事情反而会慢十倍。反而言之，要使一个n^2的算法不至于随着计算机发展显得“越来越慢”，处理器的发展速度至少要在问题规模发展速度的平方这个数量级上。<em>我们并不是（大多数情况下不是）因为一个算法解决某个问题太慢而认为这个复杂度不行，而是无法容忍随着技术的发展解决一个问题需要的时间反而更多</em>。这种说法本身的准确性姑且先不去深究，但这个观点的确很有启发性，放在一门讲算法的课程的开头也的确十分合适，它很有助于我理解“渐进复杂度关心的是<strong>增长的趋势</strong>”这一概念。</p>
+
+<h3 id="percolation">课后作业：Percolation</h3>
+<p>这一周的课后作业是Union-Find的一个具体应用。一个N-by-N的正方形格子，开始是所有的格子都是blocked，最上层可以看做有水，通过不断随机地open一些格子，最终水可以流到最下层，称为穿滤percolates。其中包含了一个很有趣的数学现象，即当实验的规模增大，达到穿滤所需open的格数占总格数的比固定在0.593附近。关于这次作业的详细内容详见<a href="http://coursera.cs.princeton.edu/algs4/assignments/percolation.html">这里</a><br />
+<img src="/images/percolates.png" alt="per1" /> <img src="/images/percolation-threshold100.png" alt="per2" /></p>
+
+
+  </div>
+
+</div>
+
+		<hr />
+	</div>	
+
+</div>
+
+</body>
+</html>

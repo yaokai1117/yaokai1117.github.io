@@ -35,33 +35,40 @@
   <div class="post-content">
     <p>由于我现在在Coursera上学习的课程 <em>Algorithms Part I</em> 使用java作为实现语言，我需要对java的一些基本知识做一些复习，尤其是java中OOP的部分，熟悉它对于数据结构的设计和使用有很多帮助。我主要参考的书籍是<a href="http://introcs.cs.princeton.edu/java/home/">Introduction to Programming in Java</a>.</p>
 
-<h3>Java中的OOP复习</h3>
+<h3 id="javaoop">Java中的OOP复习</h3>
 
 <p>既然是临场复习，就只写具体实现了，只简略的借助Introduction to Programming in Java这本书进行一下回顾。</p>
 
-<h4>一个class的构成</h4>
+<h4 id="class">一个class的构成</h4>
+<p>我在上面提到的书中找到了一张很好的图来简单明了地说明java中的class实现：
+<img src="/images/class-in-java-anatomy.png" alt="class-in-java" /></p>
 
-<p>我在上面提到的书中找到了一张很好的图来简单明了地说明java中的class实现：<br>
-<img src="/images/class-in-java-anatomy.png" alt="class-in-java"></p>
-
-<h4>如何设计自己的class（与课程其实关系不大，但看了之后觉得很有启发，决定写上来）</h4>
+<h4 id="class-1">如何设计自己的class（与课程其实关系不大，但看了之后觉得很有启发，决定写上来）</h4>
 
 <ol>
-<li><p>首先设计API，要使问题尽量明确，考虑到各种可能的inputs，同时要注意<em>&quot;It&#39;s easy to add methods to an existing API, but you can never remove them without breaking existing clients&quot;</em>,避免多余的设计，“<em>when in doubt, leave it out</em>&quot;;    </p></li>
-<li><p>然后进行封装（Encapsulation），使用private关键字。用户只应该接触到他们需要的信息和被允许的操作，至于具体的实现，应对用户隐藏；    </p></li>
-<li><p>保持不可变性（Immutability），使用final关键字。这主要是指class中的一些instance variables（见上图），这样使代码更易于维护，同时避免一些意外的发生。尤其要注意的是，在使用数组之类的可变对象(mutable objects)时，final只保证引用指向同一个实例对象，而不保证对象的内容不变。</p></li>
-<li><p>保持代码的健壮性，使用exception和assert。但assert不要用在public方法中，因为会被disable，一般只用在测试开发中！</p></li>
+  <li>
+    <p>首先设计API，要使问题尽量明确，考虑到各种可能的inputs，同时要注意<em>“It’s easy to add methods to an existing API, but you can never remove them without breaking existing clients”</em>,避免多余的设计，“<em>when in doubt, leave it out</em>”;    </p>
+  </li>
+  <li>
+    <p>然后进行封装（Encapsulation），使用private关键字。用户只应该接触到他们需要的信息和被允许的操作，至于具体的实现，应对用户隐藏；    </p>
+  </li>
+  <li>
+    <p>保持不可变性（Immutability），使用final关键字。这主要是指class中的一些instance variables（见上图），这样使代码更易于维护，同时避免一些意外的发生。尤其要注意的是，在使用数组之类的可变对象(mutable objects)时，final只保证引用指向同一个实例对象，而不保证对象的内容不变。</p>
+  </li>
+  <li>
+    <p>保持代码的健壮性，使用exception和assert。但assert不要用在public方法中，因为会被disable，一般只用在测试开发中！</p>
+  </li>
 </ol>
 
-<h4>Java中的继承与借口</h4>
+<h4 id="java">Java中的继承与借口</h4>
 
 <p><a href="http://introcs.cs.princeton.edu/java/36inheritance/">两种方法的比较</a></p>
 
 <p>这里还是只写具体实现了。先说继承，子类拥有父类所用实例变量和方法，还可以有自己的方法，关键字是extends；然后是接口，接口的定义与类相似，只要将class改为interface,且只能为public（当然啦，不然怎么起”接口“的作用呢），接口的实现是使用关键字implements，注意，一个类可以实现多个接口。</p>
 
-<h3>在Java中使用数据结构</h3>
+<h3 id="java-1">在Java中使用数据结构</h3>
 
-<h4>泛型(Generics)与自动装盒(Autoboxing)</h4>
+<h4 id="genericsautoboxing">泛型(Generics)与自动装盒(Autoboxing)</h4>
 
 <p>Java中的泛型与C++中的模版语法很类似，如下：</p>
 
@@ -76,10 +83,11 @@
 <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="mi">17</span><span class="o">);</span>        <span class="c1">// auto-boxing (int -&gt; Integer)</span>
 <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>   <span class="c1">// auto-unboxing (Integer -&gt; int)</span></code></pre></div>
 
-<h4>java.util包中的数据结构</h4>
+<h4 id="javautil">java.util包中的数据结构</h4>
 
-<p>java.util包中已经包含了我们常用的几个数据结构，了解这些结构会使我们的算法学习方便许多。这些数据结构有：<br>
-LinkedList, ArrayList, Stack, Set, Hashtable, HashMap等，具体的API...用到再说:)</p>
+<p>java.util包中已经包含了我们常用的几个数据结构，了解这些结构会使我们的算法学习方便许多。这些数据结构有：
+LinkedList, ArrayList, Stack, Set, Hashtable, HashMap等，具体的API…用到再说:)</p>
+
 
   </div>
 
