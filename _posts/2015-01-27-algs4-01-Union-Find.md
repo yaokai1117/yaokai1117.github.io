@@ -75,7 +75,7 @@ public int find(int p) {
 
 ### 课后作业：Percolation
 这一周的课后作业是Union-Find的一个具体应用。一个N-by-N的正方形格子，开始是所有的格子都是blocked，最上层可以看做有水，通过不断随机地open一些格子，最终水可以流到最下层，称为穿滤percolates。其中包含了一个很有趣的数学现象，即当实验的规模增大，达到穿滤所需open的格数占总格数的比固定在0.593附近。关于这次作业的详细内容详见[这里](http://coursera.cs.princeton.edu/algs4/assignments/percolation.html)  
-[我的实现代码(github)](https://github.com/yaokai1117/algs4.git) 
+[我的实现代码(github)](https://github.com/yaokai1117/algs4.git)  
 ![per1](/images/percolates.png) ![per2](/images/percolation-threshold100.png)
 
 
