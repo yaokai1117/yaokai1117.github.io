@@ -159,8 +159,6 @@ pre {
 #latest {
   width: 450px;
 }
-  #latest > h2 {
-  }
   #latest > ul{
     list-style: none; 
   } 
@@ -174,7 +172,24 @@ pre {
   top: 2.4px;
   width: 280px;
 }
+  #categories > h3 {
+    display: inline-block;
+    margin: 2 px 5px;
+    background-color: #617378;
+    box-shadow: 0 0 4px black;
+  }
+  #categories a {
+    color: #172689;
+    text-decoration: none; 
+  }
+  #categories a:hover {
+    color: #111;
+    text-decoration: underline;
+  }
 
+#list {
+  width: 450px;
+}
 
 /**
  * Posts
@@ -189,6 +204,10 @@ pre {
   font-size: 24px; 
 }
 
+.smaller-post-link {
+  display: block;
+  font-size: 21px;
+}
 .post-header {
   margin-bottom: 30px; 
 }

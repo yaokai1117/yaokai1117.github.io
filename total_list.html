@@ -1,21 +1,20 @@
 ---
 layout: default
-title: YaoKai's Blog
+title: Post List
 ---
 
 <div id="home">
-	<div id="latest">
-		<h2>Latest Blogs</h2>
+	<div id="list">
+		<h2>My blog posts</h2>
 		<hr />
 		<ul>
 			{% for post in site.posts %}
 			<li>
 				<span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
-				<h2>
-					<a class="post-link" href="{{ post.url }}">{{ post.title }}</a>
-				</h2>
-				<p>{{ post.excerpt }}</p>
+				<h3>
+					<a class="small-post-link" href="{{ post.url }}">{{ post.title }}</a>
+				</h3>
 			</li>
 			{% endfor %}
 		</ul>

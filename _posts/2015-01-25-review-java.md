@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Reviewing java before using it to learn DS and algorithms
+categories: algs4
 ---
 
 由于我现在在Coursera上学习的课程 *Algorithms Part I* 使用java作为实现语言，我需要对java的一些基本知识做一些复习，尤其是java中OOP的部分，熟悉它对于数据结构的设计和使用有很多帮助。我主要参考的书籍是[Introduction to Programming in Java](http://introcs.cs.princeton.edu/java/home/).

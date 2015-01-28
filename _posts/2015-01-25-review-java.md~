@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Reviewing java before using it to learn DS and algorithms
+categories: otherthings
 ---
 
 由于我现在在Coursera上学习的课程 *Algorithms Part I* 使用java作为实现语言，我需要对java的一些基本知识做一些复习，尤其是java中OOP的部分，熟悉它对于数据结构的设计和使用有很多帮助。我主要参考的书籍是[Introduction to Programming in Java](http://introcs.cs.princeton.edu/java/home/).
@@ -23,6 +24,7 @@ title: Reviewing java before using it to learn DS and algorithms
 3. 保持不可变性（Immutability），使用final关键字。这主要是指class中的一些instance variables（见上图），这样使代码更易于维护，同时避免一些意外的发生。尤其要注意的是，在使用数组之类的可变对象(mutable objects)时，final只保证引用指向同一个实例对象，而不保证对象的内容不变。
     
 4. 保持代码的健壮性，使用exception和assert。但assert不要用在public方法中，因为会被disable，一般只用在测试开发中！
+  
        
 #### Java中的继承与借口
 

@@ -4,7 +4,7 @@ title: algorithms01-Union-Find
 categories: algs4
 ---
 
-今天开始学习Coursera上的一个算法课程　*Algorithms Part I* ,参考书[Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/)。在这个过程中我大概会按每一讲来对应地更新我的blog。今天是第一讲：Union-Find.
+今天开始学习Coursera上的一个算法课程　*Algorithms Part I * ,参考书[Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/)。在这个过程中我大概会按每一讲来对应地更新我的blog。今天是第一讲：Union-Find.
 
 
 ### Union-Find的算法及其优化
