@@ -1,13 +1,12 @@
 <div id="categories">
 	<h2>Categories</h2>
 	<hr/>
+	<h3>
+		<a href="/post_lists/total_list.html">all posts</a>
+	</h3>
+	{% for cats in site.categories %}
 		<h3>
-			<a href="/total_list.html">all posts</a>
+			<a href="/post_lists/{{ cats | first }}.html">{{ cats | first }}</a>
 		</h3>
-		<h3>
-			<a href="/algs4.html">algs4</a>
-		</h3>
-		<h3>
-			<a href="/otherthings.html">otherthings</a>
-		</h3>
+	{% endfor %}
 </div>

@@ -114,7 +114,7 @@ pre {
 }
 
 #wrapper {
-  margin: 30px 270px;
+  margin: 30px auto;
   width: 800px;
   border-radius:25px;
   border:0px solid;
