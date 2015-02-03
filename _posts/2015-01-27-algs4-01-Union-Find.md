@@ -79,4 +79,6 @@ public int find(int p) {
 [我的实现代码(github)](https://github.com/yaokai1117/algs4.git)  
 ![per1](/images/percolates.png) ![per2](/images/percolation-threshold100.png)
 
-
+### 2015-02-03更新
+今天才知道这个数据结构有个名字叫*"并查集森林"*，详见[这里](http://zh.wikipedia.org/wiki/%E5%B9%B6%E6%9F%A5%E9%9B%86)  
+看来以后还是要多谷歌呀。
