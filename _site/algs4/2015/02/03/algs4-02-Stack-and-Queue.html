@@ -41,7 +41,7 @@
   </div>
 
   <div class="post-content">
-    <p>算法课程的第二讲，是比较熟悉的栈和队列。所以这里只总结几点新的知识，主要是数组的resize，java中的loitering,以及这一周的编程作业。</p>
+    <p>算法课程的第二讲，是比较熟悉的栈和队列。所以这里只总结几点新的知识，主要是数组的resize，java中的loitering,java中的for-each,以及这一周的编程作业。</p>
 
 <h3 id="resize">数组的resize</h3>
 
@@ -58,6 +58,34 @@
 <p>java中采用了自动垃圾回收的机制，一般认为这是相较于Ｃ和Ｃ++的一大进步，但是，java中的内存泄露仍然是一个很大的问题，经常因为一些很难发现的细节而导致内存泄露。lotering是一个相对简单的情况，至少在课堂上碰到的这种情况从原理上还是比较容易理解的。就以栈的数组实现为例，当一个元素退栈时（return a[–n])，要将数组中留给它的引用的地方清为null（a[n]=null)。因为java的垃圾回收器只在没有引用指向它时，才会将它回收。</p>
 
 <p>memrory leak是一个（一系列）很复杂也很需要关注的问题，尤其是Ｃ和java这些语言上。我在google搜索loitering时看到了很多更复杂的内容和实例，看来以后不可避免地要和这个问题打很多交道。</p>
+
+<h3 id="javafor-each">java中的for-each</h3>
+<p>for-each是java中的一个非常好用的特性，它给我们进行遍历操作操作提供了一个很方便的方法。例如，要遍历打印一个字符串数组中的内容，只需要这样一条语句：  </p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">array</span><span class="o">)</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span></code></pre></div>
+
+<p>要在自己设计的数据结构中实现这么一个功能，必须实现java的Iterable接口，这个接口是十分简单的，只要包含一个返回Iterator的函数就可以了：　　</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;{</span>
+    <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">();</span>
+<span class="o">}</span></code></pre></div>
+
+<p>而在Iterator中必须实现hasNext,next,和remove方法  </p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Iterator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;{</span>
+    <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">();</span>
+    <span class="n">Item</span> <span class="nf">next</span><span class="o">();</span>
+    <span class="kt">void</span> <span class="nf">remove</span><span class="o">();</span>
+<span class="o">}</span></code></pre></div>
+
+<p>然后，使用foreach语句时，java就会按照如下方式进行遍历：</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">myObject</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
+    <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+<span class="o">}</span></code></pre></div>
 
 <h3 id="section">这一周的编程作业</h3>
 
