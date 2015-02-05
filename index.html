@@ -8,7 +8,7 @@ title: YaoKai's Blog
 		<h2>Latest Blogs</h2>
 		<hr />
 		<ul>
-			{% for post in site.posts %}
+			{% for post in site.posts limit:6 %}
 			<li>
 				<span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
@@ -22,4 +22,8 @@ title: YaoKai's Blog
 	</div>
 
 	{% include categories.html %}
+
+	<div id="more">
+		<a href="/post_lists/total_list.html">more posts</a>
+	</div>
 </div>

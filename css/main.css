@@ -174,10 +174,12 @@ pre {
 }
   #categories > h3 {
     display: inline-block;
-    margin: 2 px 5px;
-    background-color: #617378;
-    box-shadow: 0 0 4px black;
-  }
+    border-radius: 8px;
+    border:1px solid #dcdcdc;
+    padding:4px r8px;
+    box-shadow:inset 1px 1px 0px 0px #ffffff;
+    background-color:#ededed;
+  }rr
   #categories a {
     color: #172689;
     text-decoration: none; 
@@ -190,6 +192,23 @@ pre {
 #list {
   width: 450px;
 }
+
+#more {
+  position: relative;
+  up:0;
+  left: 300px;
+  bottom: 20px;
+  font-size: 24px;
+}
+  #more > a{
+    display: inline-block;
+    border-radius: 8px;
+    border:1px solid #dcdcdc;
+    padding:9px 18px;
+    box-shadow:inset 1px 1px 0px 0px #ffffff;
+    background-color:#ededed;
+
+  }
 
 /**
  * Posts
