@@ -176,10 +176,10 @@ pre {
     display: inline-block;
     border-radius: 8px;
     border:1px solid #dcdcdc;
-    padding:4px r8px;
+    padding:4px 8px;
     box-shadow:inset 1px 1px 0px 0px #ffffff;
     background-color:#ededed;
-  }rr
+  }
   #categories a {
     color: #172689;
     text-decoration: none; 
