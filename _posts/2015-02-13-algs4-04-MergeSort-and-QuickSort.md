@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: algorithms04-MergeSort-and-QuickSort
 categories: algs4
 ---

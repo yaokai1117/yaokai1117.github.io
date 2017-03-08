@@ -1,1 +1,1 @@
-### This is Yao Kai, who is trying to build his own blog!
+### This is Kai Yao's blog!

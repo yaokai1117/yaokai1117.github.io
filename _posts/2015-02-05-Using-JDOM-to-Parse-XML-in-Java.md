@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: Using JDOM to parse XML in java
 categories: java
 ---

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: Reviewing java before using it to learn DS and algorithms
 categories: algs4
 ---

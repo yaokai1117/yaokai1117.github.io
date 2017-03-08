@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: algorithms02-Stack-and-Queue
 categories: algs4
 ---

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: algorithms05-Priority-Queue
 categories: algs4
 ---

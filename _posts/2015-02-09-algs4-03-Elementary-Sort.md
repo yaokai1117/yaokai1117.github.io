@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: algorithms03-Elementary-Sort
 categories: algs4
 ---

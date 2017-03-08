@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: algorithms01-Union-Find
 categories: algs4
 ---
