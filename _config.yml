@@ -2,5 +2,5 @@ encoding: UTF-8
 highlighter: pygments
 markdown: kramdown
 theme: jekyll-theme-architect
-paginate: 8
+paginate: 10
 paginate_path: "/page:num"
